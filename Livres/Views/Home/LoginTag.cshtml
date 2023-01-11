@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model LoginForm
+
+@*ViewContext est un objet de la vue: pour accéder au ModelState il faut passer par ViewContext*@
+@if (!ViewContext.ModelState.IsValid) {
+
+<div asp-validation-summary="All" class="alert bg-danger">Il y a @((ViewContext.ModelState.ErrorCount erreur ((ViewContext.ModelState.ErrorCount > 1) ? "s" : "") dans votre formulaire.)</div>
+
+
+}
+
+@*<form method="post">*@
+@using (Html.BeginForm())
+{
+    <div>
+        @*<label>Email: </label>*@
+        @*<input type="text" name="Email">*@
+        @Html.LabelFor(model => model.Email)
+        @Html.EditorFor(model => model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.Email,
+                                    message: "Erreur detectée",
+                                    htmlAttributes: new { @class = "text-danger" })
+    </div>
+    <div>
+        @*<label>Mot de passe: </label>*@
+        @*<input type="password" name="Passwd">*@
+        @Html.LabelFor(model => model.Passwd)
+        @Html.EditorFor(model => model.Passwd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.Passwd,
+                            message: null,
+                            htmlAttributes: new { @class = "text-danger" })
+    </div>
+    <input type="submit" value="Connection" />
+}
+@*</form>*@
+
+<a asp-action = "Index" class = "btn btn-warning">Retour à la page principale</a>

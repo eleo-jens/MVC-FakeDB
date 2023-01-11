@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Livres.Models.Auteur>
+
+<h1>Liste d'auteurs</h1>
+
+<a asp-action="Create" class="btn btn-primary">Ajouter un auteur</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Date de naissance</th>
+            <th>Id</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Auteur auteur in Model)
+        {
+            <tr>
+                <td>@auteur.Prenom</td>
+                <td>@auteur.Nom</td>
+                <td>@auteur.DateNaissance</td>
+                <td>@auteur.Id</td>
+                <td>
+                    <a class="btn btn-secondary" asp-action="Delete" asp-route-Id="@auteur.Id">Supprimer</a>
+                    <a class="btn btn-secondary" asp-action="Update" asp-route-Id="@auteur.Id">Modifier</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

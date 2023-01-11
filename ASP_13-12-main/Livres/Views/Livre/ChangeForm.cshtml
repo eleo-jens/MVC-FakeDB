@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@using Livres.FakeDB;
+@model Livres.Models.Livre;
+@*@model Livres.Models.ViewModel.LivreForm; *@
+
+@*@if (!ViewContext.ModelState.IsValid){
+        @foreach(KeyValuePair<string, ModelStateEntry> kvp in ViewContext.ModelState)
+        {
+            <span class="text-danger">
+                @kvp.Key: @ModelError.ErrorMessage
+            </span>
+        }
+    }*@
+
+<form method="post" asp-action="Create">
+    <div>
+        <label asp-for="Titre" value="@Model.Titre">Titre: </label>
+        <input asp-for="Titre" type="text" />
+    </div>
+    <div>
+        <label asp-for="AuteurId">Auteur: </label>
+        <select asp-for="AuteurId" id="Auteur">
+            @foreach (Auteur auteur in AuteurDB.auteurs)
+            {
+                if (auteur.Id == Model.AuteurId)
+                {
+                    <option value="@auteur.Id" selected>@auteur.Prenom @auteur.Nom</option>
+
+                }
+                else
+                {
+                    <option value="@auteur.Id">@auteur.Prenom @auteur.Nom</option>
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="ISBN">ISBN: </label>
+        <input asp-for="ISBN" value="@Model.ISBN" />
+    </div>
+    <div>
+        <input type="submit" value="Modifier" class="btn btn-primary" asp-route-Id="@Model.Id"/>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Retour à la liste</a>
+</div>

@@ -1,0 +1,31 @@
+﻿@*Liste tableau des livres*@
+@*Je récupère une liste de livre*@
+@using Livres.FakeDB
+@model IEnumerable<Livres.Models.Livre>
+
+<h1>Liste de livres</h1>
+
+<a asp-action="Create" class="btn btn-primary">Ajouter un livre</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Livre livre in Model)
+        {
+            <tr>
+                <td>@livre.Titre</td>
+                <td>@AuteurDB.GetById(livre.AuteurId).Prenom @AuteurDB.GetById(livre.AuteurId).Nom</td>
+                <td>
+                    <a class="btn btn-secondary" asp-action="Delete" asp-Route-Id="@livre.Id">Supprimer</a>
+                    <a class="btn btn-secondary" asp-action="ChangeForm" asp-Route-Id="@livre.Id">Modifier</a>
+                </td>
+             </tr>
+        }
+    </tbody>
+</table>

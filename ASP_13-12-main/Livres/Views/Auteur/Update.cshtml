@@ -1,0 +1,20 @@
+﻿@model Livres.Models.Auteur
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Prenom">Prénom: </label>
+        <input asp-for="Prenom" type="text" value="@Model.Prenom">
+    </div>
+    <div>
+        <label asp-for="Nom">Nom: </label>
+        <input asp-for="Nom" type="text" value="@Model.Nom">
+    </div>
+    <div>
+        <label asp-for="DateNaissance">Date de naissance: </label>
+        <input asp-for="DateNaissance" type="date" value="@Model.DateNaissance">
+    </div>
+    <input type="submit" value="Modifier" class="btn btn-primary" asp-route-Id="@Model.Id"/>
+</form>
+
+<a asp-action="Index">Retour à la liste d'auteurs</a>
+
